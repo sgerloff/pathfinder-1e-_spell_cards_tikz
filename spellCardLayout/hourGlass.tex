@@ -1,0 +1,11 @@
+\tikz{
+  \fill[black, opacity=1] (6mm,8mm) to[out=90,in=-90] (10mm,14mm) to[out=150,in=-30] (0mm,14mm) to[out=-90,in=90] (4mm,8mm) -- cycle;
+
+  \fill[black, opacity=0.5] (6mm,8mm) rectangle (4mm,6mm);
+  \fill[black, opacity=0.25] (6mm,6mm) rectangle (4mm,4mm);
+  \fill[black, opacity=0.125] (6mm,4mm) rectangle (4mm,2mm);
+  % \fill[black, opacity=1] (0,0) rectangle (10mm,1.5mm);
+  \fill[black] (0,0) -- (10mm,0mm) -- (10mm,1.5mm) to[out=210,in=30] (0mm,1.5mm) -- cycle;
+
+  \draw[black, line width=1mm] (0,0) -- (1cm,0cm) -- (1cm,2mm) to[out=90,in=-90] (6mm,8mm) to[out=90,in=-90] (10mm,14mm) -- (10mm,16mm) -- (0mm,16mm) -- (0mm,14mm) to[out=-90,in=90] (4mm,8mm) to[out=-90,in=90] (0,2mm) -- cycle;
+}

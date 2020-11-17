@@ -1,0 +1,173 @@
+\documentclass{standalone}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\usetikzlibrary{shapes.geometric}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.12}
+
+\usepackage[onehalfspacing]{setspace}
+\linespread{1}
+
+\usepackage{bookman}
+
+\definecolor{paperColor1}{HTML}{D2C59E}
+\definecolor{paperColor2}{HTML}{C4B495}
+
+\definecolor{flagColor1}{HTML}{_flagColor1R_}
+\definecolor{flagColor2}{HTML}{_flagColor2R_}
+
+% x=3*(minimum size)/2
+% x=\sqrt{3/4}*(minimum size)/2
+%
+\def\hexWidth{5.25mm}
+\newcommand{\newRandom}[1]{
+  \pgfmathparse{rnd}
+  \edef#1{\pgfmathresult}
+}
+%
+\newcommand{\textField}[5]{
+\node[box, draw, line width=0.5mm, fill=black!10!white] (#4) at (1.5*\hexWidth*#1,0.866*\hexWidth*#3) {};
+\node[box, draw, line width=0.5mm, fill=white] (#5) at (1.5*\hexWidth*#2,0.866*\hexWidth*#3) {};
+\fill[white, left color=black!10!white, middle color=black!0!white, right color=black!0!white] (#4.south) rectangle (#5.north);
+\draw[black, line width=0.5mm] (#4.south) -- (#5.south);
+\draw[black, line width=0.5mm] (#4.north) -- (#5.north);
+}
+\newcommand{\symbolField}[3]{
+\node[box, draw, fill=white] (#3) at (1.5*\hexWidth*#1,0.866*\hexWidth*#2) {};
+}
+
+\newcommand{\spellName}{_spellNameR_}
+\newcommand{\descriptionT}{
+_descriptionR_
+}
+\newcommand{\GRWp}{_pageR_}
+\newcommand{\timeT}{_timeR_}
+\newcommand{\componentT}{_componentR_}
+\newcommand{\durationT}{_durationR_}
+\newcommand{\resistanceF}{_resistanceR_}
+\newcommand{\targetT}{_targetR_}
+\newcommand{\rangeT}{_rangeR_}
+\newcommand{\classT}{_classR_}
+\newcommand{\spellLevelN}{_spellLevelR_}
+
+% \input{card.tex}
+
+\begin{document}
+\begin{tikzpicture}
+  \node[inner sep=0pt, draw=black, line width=2pt] (card) at (0,0) {
+    \tikz{
+      \fill[top color=black!90!white, bottom color=black!80!white] (0,0) rectangle (63mm,88mm);
+    }
+  };
+
+  \node[inner sep=0pt, outer sep=0pt, inner xsep=-20pt, anchor=north] (topInterface) at ($(card.north)+(-0.mm,-0.1mm)$) {
+    \tikz{
+    \input{../spellCardLayout/hexagonBoxes.tex}
+
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    \textField{0.25}{1.5}{13}{timeTextl}{timeText}
+    \symbolField{0}{13}{timeSymbol}
+
+    \node[anchor=center, scale=0.24, inner sep=0pt, inner sep=-1pt] (stopWatch) at ($(timeSymbol.center)+(0.3pt,0pt)$) {
+      \input{../spellCardLayout/stopWatch.tex}
+    };
+
+    \node[anchor=center, xscale=0.9] at ($0.5*(timeTextl.center)+0.5*(timeText.center) +(0.5mm,0mm)$) {
+        \centering \footnotesize \timeT
+    };
+
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+    \textField{2.25}{3.5}{13}{componentTextl}{componentText}
+    \symbolField{2}{13}{componentSymbol}
+
+    \node[anchor=center, scale=0.21] (component) at ($(componentSymbol.center)+(0.3pt,0pt)$) {
+      \input{../spellCardLayout/component.tex}
+    };
+
+    \node[anchor=center, xscale=0.9, inner sep=-1pt] at ($0.5*(componentTextl.center)+0.5*(componentText.center) +(0.5mm,0mm)$) {
+        \centering \footnotesize \componentT
+    };
+
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+    \textField{4.25}{5.5}{13}{durationTextl}{durationText}
+    \symbolField{4}{13}{durationSymbol}
+
+    \node[anchor=center, scale=0.2, inner sep=-1pt] (hourGlass) at ($(durationSymbol.center)+(0.3pt,0pt)$) {
+      \input{../spellCardLayout/hourGlass.tex}
+    };
+
+    \node[anchor=center, xscale=0.9] at ($0.5*(durationTextl.center)+0.5*(durationText.center)+(0.5mm,0mm)$) {
+        \centering \footnotesize \durationT
+    };
+
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+    \symbolField{6}{13}{resistenceSymbol}
+
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+    \textField{0.25}{3.5}{12}{targetTextl}{targetText}
+    \symbolField{0}{12}{targetSymbol}
+
+    \node[anchor=center, scale=0.19, inner sep=-1pt] (target) at ($(targetSymbol.center)+(0.3pt,0pt)$) {
+      \input{../spellCardLayout/target.tex}
+    };
+
+    \node[anchor=center, xscale=0.9] at ($0.5*(targetTextl.center)+0.5*(targetText.center) +(0.5mm,0mm)$) {
+        \centering \footnotesize \targetT
+    };
+
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+    \textField{4.25}{7}{12}{rangeTextl}{rangeText}
+    \symbolField{4}{12}{rangeSymbol}
+
+    \node[anchor=center, scale=0.23, inner sep=-1pt] (range) at ($(rangeSymbol.center)+(0.3pt,0pt)$) {
+      \input{../spellCardLayout/range.tex}
+    };
+
+    \node[anchor=center, xscale=0.9] at ($0.5*(rangeTextl.center)+0.5*(rangeText.center) +(0.5mm,0mm)$) {
+        \centering \footnotesize \rangeT
+    };
+
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+    \node[anchor=south west, minimum width=60mm, text width=60mm, xscale=0.85, white] (spellName) at ($(timeSymbol.north west)+(-1mm,2mm)$) {
+      \normalsize \sc \spellName
+    };
+
+    \node[anchor=north west] (typeFlag) at ($(spellName.north east)+(5.5mm,2mm)$) {
+      \tikz{
+        \draw[fill=red, top color=flagColor2, bottom color=flagColor1] (0,0) -- (0,-1) to[out=20,in=200] (0.85,-1) -- (0.85,0) -- cycle;
+      }
+    };
+
+    \node[anchor=north, below=1mm, xscale=0.8] at (typeFlag.north) {\small \classT};
+    \node[anchor=south, above=2.5mm, xscale=1.1] at (typeFlag.south) {\huge \bf \spellLevelN};
+
+      \node[anchor=center, scale=0.25, inner sep=-1pt] (defence) at ($(resistenceSymbol.center)+(0.3pt,0pt)$) {
+        \input{../spellCardLayout/\resistanceF}
+      };
+
+    }
+  };
+
+  \node[anchor=south, inner xsep=1mm] (descriptionField) at ($(card.south) + (0,0.05mm)$) {
+    \tikz{
+      \node[draw=paperColor1!25!black,line width=1pt, top color=paperColor1, bottom color=paperColor2, xscale=0.9] {
+          \begin{minipage}[t][68.5mm]{65.5mm}
+            \scriptsize \descriptionT
+          \end{minipage}
+      };
+    }
+  };
+
+  \node[xscale=0.9, anchor=south east, inner sep=1pt] at ($(descriptionField.south east)+(-1.5mm,1.5mm)$) {
+  \scriptsize \it \GRWp
+  };
+\end{tikzpicture}
+\end{document}

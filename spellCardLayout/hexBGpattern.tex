@@ -1,0 +1,26 @@
+\foreach \i in {0,...,9}
+\foreach \j in {0,...,14} {
+  \newRandom{\randOne}
+  \newRandom{\randTwo}
+  \newRandom{\randThree}
+  \newRandom{\randFour}
+  \pgfmathparse{100*0.5*(\randOne+\randTwo)}
+  \edef\tmp{\pgfmathresult}
+  \pgfmathparse{ \j/8. }
+  \edef\opacityTmp{\pgfmathresult}
+  \node[box, top color=colorOne!\tmp!colorTwo, bottom color=colorTwo, opacity=\opacityTmp] at (1.5*\hexWidth*\i,0.866*\hexWidth*\j) {};
+  \pgfmathparse{100*0.5*(\randThree+\randFour)}
+  \edef\tmp{\pgfmathresult}
+  \pgfmathparse{ (\j+0.5)/8. }
+  \edef\opacityTmp{\pgfmathresult}
+  \node[box, top color=colorOne!\tmp!colorTwo, bottom color=colorTwo, opacity=\opacityTmp] at (1.5*\hexWidth*\i+0.75*\hexWidth,0.866*\hexWidth*\j+0.433*\hexWidth) {};
+}
+%
+\foreach \j in {0,...,14} {
+  \newRandom{\randThree}\newRandom{\randFour}
+  \pgfmathparse{100*0.5*(\randThree+\randFour)}
+  \edef\tmp{\pgfmathresult}
+  \pgfmathparse{ (\j+0.5)/8. }
+  \edef\opacityTmp{\pgfmathresult}
+  \node[box, top color=colorOne!\tmp!colorTwo, bottom color=colorTwo, opacity=\opacityTmp] at (-1.5*\hexWidth+0.75*\hexWidth,0.866*\hexWidth*\j+0.433*\hexWidth){};
+}
